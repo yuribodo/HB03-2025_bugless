@@ -9,7 +9,6 @@ export function AnimatedBugIcon() {
       initial={{ opacity: 0, scale: 0.8, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className='mb-6'
     >
       <motion.div
         animate={{

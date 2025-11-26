@@ -45,8 +45,8 @@ export function InstallCommand() {
         <motion.button
           onClick={copyToClipboard}
           whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className={`flex items-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors ${
+          whileTap={{ scale: 0.97 }}
+          className={`flex cursor-pointer items-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors ${
             copied
               ? 'bg-success/20 text-success'
               : 'bg-primary text-primary-foreground hover:bg-primary-hover'
