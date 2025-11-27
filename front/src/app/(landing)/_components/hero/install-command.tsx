@@ -35,7 +35,7 @@ export function InstallCommand() {
       className='mx-auto max-w-md'
     >
       <div className='flex items-center gap-2 rounded-lg border bg-surface p-2'>
-        <div className='flex flex-1 items-center gap-3 px-4 py-2'>
+        <div className='flex flex-1 items-center gap-3 px-2 py-2'>
           <span className='text-text-muted'>$</span>
           <code className='text-sm text-foreground sm:text-base'>
             {INSTALL_COMMAND}
