@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id         String        @id @default(uuid())
+  id         String        @id @default(ulid())
   email      String        @unique @map("email_user")
   password   String        @map("password_user")
   createdAt  DateTime      @default(now()) @map("created_at")
@@ -27,7 +27,7 @@ model User {
 }
 
 model Project {
-  id          String       @id @default(uuid())
+  id          String       @id @default(ulid())
   name        String       @map("name_project")
   description String?
   userId      String       @map("id_user")
@@ -40,7 +40,7 @@ model Project {
 }
 
 model StatusPlan {
-  id   String @id @default(uuid())
+  id   String @id @default(ulid())
   name String @map("name_status_plan")
   
   plans Plan[]
@@ -49,7 +49,7 @@ model StatusPlan {
 }
 
 model Plan {
-  id                String        @id @default(uuid())
+  id                String        @id @default(ulid())
   name              String        @map("name_plan")
   price             Decimal       @map("price_plan") @db.Decimal(10, 2)
   requestPerDay     Int           @map("request_per_day")
@@ -64,7 +64,7 @@ model Plan {
 }
 
 model Subscription {
-  id        String   @id @default(uuid())
+  id        String   @id @default(ulid())
   startDate DateTime @map("start_date")
   endDate   DateTime? @map("end_date")
   status    String
@@ -80,7 +80,7 @@ model Subscription {
 }
 
 model StatusSubmission {
-  id   String @id @default(uuid())
+  id   String @id @default(ulid())
   name String @map("name_status_submission")
   
   submissions Submission[]
@@ -89,7 +89,7 @@ model StatusSubmission {
 }
 
 model Submission {
-  id                String            @id @default(uuid())
+  id                String            @id @default(ulid())
   codeContent       String            @map("code_content") @db.Text
   createdAt         DateTime          @default(now()) @map("created_at")
   userId            String            @map("user_id")
@@ -105,7 +105,7 @@ model Submission {
 }
 
 model Review {
-  id              String   @id @default(uuid())
+  id              String   @id @default(ulid())
   summary         String?  @db.Text
   detectedIssues  String?  @map("detected_issues") @db.Text
   suggestedChanges String? @map("suggested_changes") @db.Text
