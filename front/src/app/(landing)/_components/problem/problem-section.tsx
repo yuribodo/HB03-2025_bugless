@@ -31,7 +31,7 @@ export function ProblemSection() {
   const { ref, isInView } = useSectionReveal()
 
   return (
-    <section ref={ref} className='bg-background py-32'>
+    <section ref={ref} className='bg-background pb-32'>
       <Container>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
