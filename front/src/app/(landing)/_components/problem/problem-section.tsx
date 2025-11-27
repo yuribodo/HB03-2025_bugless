@@ -1,26 +1,26 @@
 'use client'
 
 import { useSectionReveal } from '@/app/(landing)/_hooks/use-section-reveal'
-import { Books, Clock, SpeakerHigh } from '@phosphor-icons/react'
+import { BooksIcon, ClockIcon, SpeakerHighIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { Container } from '../shared/container'
 import { ProblemCard } from './problem-card'
 
 const problems = [
   {
-    icon: SpeakerHigh,
+    icon: SpeakerHighIcon,
     title: 'Too much noise',
     description:
       '~50% of comments are false positives or style nitpicks. Developers learn to ignore all suggestions.',
   },
   {
-    icon: Books,
+    icon: BooksIcon,
     title: 'Not deep enough',
     description:
       "Tools cover 50+ languages and end up shallow in all. They don't understand TypeScript patterns.",
   },
   {
-    icon: Clock,
+    icon: ClockIcon,
     title: 'Too late',
     description:
       'Analysis happens after PR is open. Bug is already committed. Now you need another commit to fix.',

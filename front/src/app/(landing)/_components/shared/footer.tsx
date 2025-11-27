@@ -2,7 +2,7 @@
 
 import { Logo } from '@/components/common/logo'
 import { NAV_LINKS } from '@/lib/constants'
-import { ArrowRight, GithubLogo, TwitterLogo } from '@phosphor-icons/react'
+import { ArrowRightIcon, GithubLogoIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Container } from './container'
@@ -42,7 +42,7 @@ export function Footer() {
                   className='flex items-center gap-2 rounded-md bg-primary px-6 py-3 font-medium whitespace-nowrap text-primary-foreground transition-colors hover:bg-primary-hover'
                 >
                   Join Waitlist
-                  <ArrowRight weight='bold' className='size-4' />
+                  <ArrowRightIcon weight='bold' className='size-4' />
                 </motion.button>
               </div>
             </div>
@@ -74,15 +74,7 @@ export function Footer() {
                 rel='noopener noreferrer'
                 className='text-text-secondary transition-colors hover:text-foreground'
               >
-                <GithubLogo size={20} weight='fill' />
-              </a>
-              <a
-                href='https://twitter.com'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-text-secondary transition-colors hover:text-foreground'
-              >
-                <TwitterLogo size={20} weight='fill' />
+                <GithubLogoIcon size={20} weight='fill' />
               </a>
             </div>
           </div>

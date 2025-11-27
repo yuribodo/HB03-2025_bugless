@@ -1,6 +1,6 @@
 'use client'
 
-import { Check, Copy } from '@phosphor-icons/react'
+import { CheckIcon, CopyIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 
@@ -62,7 +62,7 @@ export function InstallCommand() {
                 transition={{ duration: 0.15 }}
                 className='flex items-center gap-2'
               >
-                <Check weight='bold' className='size-4' />
+                <CheckIcon weight='bold' className='size-4' />
                 <span>Copied!</span>
               </motion.div>
             ) : (
@@ -74,7 +74,7 @@ export function InstallCommand() {
                 transition={{ duration: 0.15 }}
                 className='flex items-center gap-2'
               >
-                <Copy weight='bold' className='size-4' />
+                <CopyIcon weight='bold' className='size-4' />
                 <span>Copy</span>
               </motion.div>
             )}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useSectionReveal } from '@/app/(landing)/_hooks/use-section-reveal'
-import { Check, X } from '@phosphor-icons/react'
+import { CheckIcon, XIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { Container } from '../shared/container'
 
@@ -48,12 +48,12 @@ const features: Feature[] = [
 function renderCell(value: string | boolean, isBugless = false) {
   if (typeof value === 'boolean') {
     return value ? (
-      <Check
+      <CheckIcon
         weight='bold'
         className={`size-5 ${isBugless ? 'text-primary' : 'text-success'}`}
       />
     ) : (
-      <X weight='bold' className='size-5 text-text-muted' />
+      <XIcon weight='bold' className='size-5 text-text-muted' />
     )
   }
   return (
