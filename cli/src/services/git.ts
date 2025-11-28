@@ -144,10 +144,10 @@ export class GitService {
     const escapedPath = filePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const regex = new RegExp(
       `diff --git a/${escapedPath}.*?(?=diff --git|$)`,
-      's'
+      'gs'
     );
-    const match = fullDiff.match(regex);
-    return match ? match[0] : '';
+    const matches = [...fullDiff.matchAll(regex)];
+    return matches.map(m => m[0]).join('\n');
   }
 
   private deduplicateFiles(files: DiffFileEntry[]): DiffFileEntry[] {

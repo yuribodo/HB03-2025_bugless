@@ -14,6 +14,8 @@ export interface ReviewIssue {
   category: Category;
 }
 
+export type Issue = ReviewIssue;
+
 export interface ReviewSummary {
   totalIssues: number;
   criticalCount: number;
