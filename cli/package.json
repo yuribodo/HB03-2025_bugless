@@ -4,7 +4,17 @@
   "description": "AI-powered code review CLI for BugLess",
   "type": "module",
   "bin": {
-    "bugless": "./dist/index.js"
+    "bugless": "dist/index.js"
+  },
+  "files": ["dist"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProgramadoresSemPatria/HB03-2025_bugless.git"
+  },
+  "author": "ProgramadoresSemPatria",
+  "homepage": "https://github.com/ProgramadoresSemPatria/HB03-2025_bugless#readme",
+  "bugs": {
+    "url": "https://github.com/ProgramadoresSemPatria/HB03-2025_bugless/issues"
   },
   "scripts": {
     "dev": "tsx watch src/index.tsx",
