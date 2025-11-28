@@ -49,7 +49,7 @@ export function PricingCard({
       )}
 
       <div className='mb-6'>
-        <h3 className='mb-2 text-2xl font-bold'>{name}</h3>
+        <h3 className='mb-3 text-2xl font-bold'>{name}</h3>
         <div>
           <span className='text-5xl font-bold'>{price}</span>
           {period && <span className='ml-1 text-text-muted'>/{period}</span>}
