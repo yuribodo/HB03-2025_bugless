@@ -4,7 +4,7 @@ import { CheckIcon, CopyIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 
-const INSTALL_COMMAND = 'npm install -g bugless'
+const INSTALL_COMMAND = 'npm install -g bugless-cli'
 
 export function InstallCommand() {
   const [copied, setCopied] = useState(false)
