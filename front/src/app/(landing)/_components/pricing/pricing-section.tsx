@@ -3,6 +3,8 @@
 import { useSectionReveal } from '@/app/(landing)/_hooks/use-section-reveal'
 import { MotionDiv } from '@/components/motion'
 import { Container } from '../shared/container'
+import { SectionDescription } from '../shared/section-description'
+import { SectionHeading } from '../shared/section-heading'
 import { PricingCard } from './pricing-card'
 
 const plans = [
@@ -62,13 +64,11 @@ export function PricingSection() {
     >
       <Container>
         <MotionDiv isInView={isInView}>
-          <h2 className='mb-4 text-4xl text-balance text-foreground md:text-5xl'>
-            Simple, transparent pricing
-          </h2>
-          <p className='mx-auto max-w-xl text-lg text-pretty text-text-secondary'>
+          <SectionHeading>Simple, transparent pricing</SectionHeading>
+          <SectionDescription>
             Start free, upgrade when you need more. No hidden fees, no
             surprises.
-          </p>
+          </SectionDescription>
         </MotionDiv>
 
         <div className='mx-auto grid max-w-6xl gap-10 md:grid-cols-3'>

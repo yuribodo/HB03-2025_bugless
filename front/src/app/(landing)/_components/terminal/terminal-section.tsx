@@ -4,6 +4,8 @@ import { useSectionReveal } from '@/app/(landing)/_hooks/use-section-reveal'
 import { MotionDiv } from '@/components/motion'
 import { motion } from 'framer-motion'
 import { Container } from '../shared/container'
+import { SectionDescription } from '../shared/section-description'
+import { SectionHeading } from '../shared/section-heading'
 import { TerminalDemo } from './terminal-demo'
 
 export function TerminalSection() {
@@ -13,13 +15,11 @@ export function TerminalSection() {
     <section ref={ref} className='bg-surface py-32'>
       <Container>
         <MotionDiv isInView={isInView}>
-          <h2 className='mb-4 text-4xl text-foreground md:text-5xl'>
-            Built for the terminal
-          </h2>
-          <p className='mx-auto max-w-2xl text-lg text-text-secondary'>
+          <SectionHeading>Built for the terminal</SectionHeading>
+          <SectionDescription>
             4 review modes that integrate with your existing workflow. No
             context switching, no web UI required.
-          </p>
+          </SectionDescription>
         </MotionDiv>
 
         <motion.div

@@ -9,6 +9,8 @@ import {
 } from '@phosphor-icons/react/dist/ssr'
 import { motion } from 'framer-motion'
 import { Container } from '../shared/container'
+import { SectionDescription } from '../shared/section-description'
+import { SectionHeading } from '../shared/section-heading'
 import { ProblemCard } from './problem-card'
 
 const problems = [
@@ -79,15 +81,15 @@ export function ProblemSection() {
 
       <Container className='relative'>
         <MotionDiv isInView={isInView} className='pb-16'>
-          <h2 className='mb-4 text-4xl text-foreground md:text-5xl'>
+          <SectionHeading>
             Stop shipping bugs. Start shipping confidence.
-          </h2>
-          <p className='mx-auto max-w-2xl text-lg text-text-secondary'>
+          </SectionHeading>
+          <SectionDescription className='mx-auto max-w-2xl text-lg text-text-secondary'>
             Every developer knows the frustration: code that looked perfect
             breaks in production. Manual reviews miss edge cases. Static linters
             throw false positives. You need a smarter way to catch problems
             before they become incidents.
-          </p>
+          </SectionDescription>
         </MotionDiv>
 
         <div className='grid gap-6 md:grid-cols-3'>
