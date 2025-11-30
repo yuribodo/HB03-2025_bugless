@@ -1,13 +1,13 @@
 import Conf from 'conf';
 import { randomUUID } from 'crypto';
 import type { User, TokenResponse } from '../types/auth.js';
+import { configService } from './config.js';
 
-const WEB_URL = process.env.BUGLESS_WEB_URL || 'http://localhost:3000';
+const WEB_URL = process.env.BUGLESS_WEB_URL || 'http://localhost:3001';
 
 interface AuthStore {
   token?: string;
   user?: User;
-  mock_attempts?: number;
 }
 
 const store = new Conf<AuthStore>({
@@ -15,33 +15,50 @@ const store = new Conf<AuthStore>({
   configName: 'auth',
 });
 
-// ============================================
-// MOCK - Replace when API is ready
-// ============================================
+interface ApiResponse {
+  success: boolean;
+  message: string;
+  data?: {
+    status: 'pending' | 'completed' | 'expired';
+    token?: string;
+    user?: User;
+  };
+}
 
 async function checkLoginStatus(sessionId: string): Promise<TokenResponse | null> {
-  // TODO: When API is ready:
-  // const res = await fetch(`${API_URL}/api/auth/cli-status?sid=${sessionId}`);
-  // const data = await res.json();
-  // if (data.status === 'pending') return null;
-  // return data;
+  const apiUrl = configService.getApiUrl() || 'http://localhost:3000';
 
-  // MOCK: Simulates pending for 3 attempts, then returns token
-  const attempts = (store.get('mock_attempts') ?? 0) as number;
-  store.set('mock_attempts', attempts + 1);
+  try {
+    const response = await fetch(`${apiUrl}/auth/cli-status?sid=${sessionId}`);
+    const data: ApiResponse = await response.json();
 
-  if (attempts < 3) {
-    return null; // Simulates "pending"
+    if (!data.success || !data.data) {
+      return null;
+    }
+
+    if (data.data.status === 'pending') {
+      return null;
+    }
+
+    if (data.data.status === 'expired') {
+      throw new Error('Session expired. Please try again.');
+    }
+
+    if (data.data.status === 'completed' && data.data.token && data.data.user) {
+      return {
+        access_token: data.data.token,
+        user: data.data.user,
+      };
+    }
+
+    return null;
+  } catch (error) {
+    if (error instanceof Error && error.message.includes('expired')) {
+      throw error;
+    }
+    // Network error - continue polling
+    return null;
   }
-
-  store.set('mock_attempts', 0); // Reset
-  return {
-    access_token: 'bg_mock_token_xxxxx',
-    user: {
-      email: 'mario@email.com',
-      name: 'Mario',
-    },
-  };
 }
 
 // ============================================
@@ -92,7 +109,6 @@ export async function login(callbacks: LoginCallbacks): Promise<void> {
 export function logout(): void {
   store.delete('token');
   store.delete('user');
-  store.delete('mock_attempts');
 }
 
 export function getToken(): string | null {
