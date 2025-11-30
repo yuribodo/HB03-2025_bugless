@@ -47,10 +47,8 @@ class NotifyService {
 
         this.setupHeaders(res);
 
-        // If there are no clients, send the connected event
-        if (this.clients.get(submissionId)?.length === 0) {
-            this.sendEvent(res, { type: EventType.CONNECTED });
-        }
+        // Send the connected event immediately to the new client
+        this.sendEvent(res, { type: EventType.CONNECTED });
 
         res.on('close', () => {
             const clients = this.clients.get(submissionId) || [];

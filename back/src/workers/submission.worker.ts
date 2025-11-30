@@ -2,7 +2,7 @@ import { Queue, Worker, Job } from "bullmq";
 import prisma from "../database/prisma";
 import { StatusSubmissionEnum } from "../generated/prisma/enums";
 import { redisConnection } from "../config/redis.config";
-import aiProvider from "../providers/ai.provider";
+import aiService from "../services/ai.service";
 import submissionService from "../services/submission.service";
 import { Submission } from "../generated/prisma/client";
 import reviewService from "../services/review.service";
@@ -28,11 +28,24 @@ class SubmissionWorker {
             const submission = await prisma.submission.findUnique({ where: { id: submissionId } });
             if (!submission) throw new Error("Submission not found");
 
-            const reviewData = await aiProvider.analyzeCode(submission.codeContent);
+            const codeContentJson = JSON.stringify(submission.codeContent);
+
+            const reviewData = await aiService.generateAnalysisStream(
+                codeContentJson,
+                submission.submissionMode,
+                (chunk) => {
+                    notifyService.notify(submissionId, {
+                        type: EventType.PROCESSING,
+                        data: { chunk }
+                    });
+                }
+            );
             
             const newReview = await reviewService.createReview({
-                ...reviewData,
-                submissionId: submission.id
+                submissionId: submission.id,
+                summary: reviewData.summary,
+                detectedIssues: reviewData.detectedIssues,
+                suggestedChanges: reviewData.suggestedChanges
             });
 
             if (!newReview) throw new Error("Review not created");
