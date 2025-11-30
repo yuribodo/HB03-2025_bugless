@@ -1,7 +1,7 @@
 'use client'
 
 import { useSectionReveal } from '@/app/(landing)/_hooks/use-section-reveal'
-import { motion } from 'framer-motion'
+import { MotionDiv } from '@/components/motion'
 import { Container } from '../shared/container'
 import { PricingCard } from './pricing-card'
 
@@ -61,12 +61,7 @@ export function PricingSection() {
       className='relative z-10 scroll-mt-20 rounded-t-3xl bg-background py-32 shadow-[0_-20px_50px_rgba(0,0,0,0.3)]'
     >
       <Container>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className='mb-20 text-center'
-        >
+        <MotionDiv isInView={isInView}>
           <h2 className='mb-4 text-4xl text-balance text-foreground md:text-5xl'>
             Simple, transparent pricing
           </h2>
@@ -74,7 +69,7 @@ export function PricingSection() {
             Start free, upgrade when you need more. No hidden fees, no
             surprises.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         <div className='mx-auto grid max-w-6xl gap-10 md:grid-cols-3'>
           {plans.map((plan) => (

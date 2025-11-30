@@ -1,6 +1,7 @@
 'use client'
 
 import { useSectionReveal } from '@/app/(landing)/_hooks/use-section-reveal'
+import { MotionDiv } from '@/components/motion'
 import {
   BugIcon,
   ClockIcon,
@@ -77,27 +78,17 @@ export function ProblemSection() {
       </div>
 
       <Container className='relative'>
-        <div className='z-10 flex flex-col items-center justify-center pb-16 text-center'>
-          <motion.h2
-            initial={{ opacity: 0, y: 60 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className='my-2.5 text-4xl md:text-5xl'
-          >
+        <MotionDiv isInView={isInView} className='pb-16'>
+          <h2 className='mb-4 text-4xl text-foreground md:text-5xl'>
             Stop shipping bugs. Start shipping confidence.
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 60 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className='mt-2.5 max-w-prose text-lg text-text-secondary'
-          >
+          </h2>
+          <p className='mx-auto max-w-2xl text-lg text-text-secondary'>
             Every developer knows the frustration: code that looked perfect
             breaks in production. Manual reviews miss edge cases. Static linters
             throw false positives. You need a smarter way to catch problems
             before they become incidents.
-          </motion.p>
-        </div>
+          </p>
+        </MotionDiv>
 
         <div className='grid gap-6 md:grid-cols-3'>
           {problems.map((problem, i) => (

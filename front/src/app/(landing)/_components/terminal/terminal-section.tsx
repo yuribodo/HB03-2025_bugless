@@ -1,6 +1,7 @@
 'use client'
 
 import { useSectionReveal } from '@/app/(landing)/_hooks/use-section-reveal'
+import { MotionDiv } from '@/components/motion'
 import { motion } from 'framer-motion'
 import { Container } from '../shared/container'
 import { TerminalDemo } from './terminal-demo'
@@ -11,12 +12,7 @@ export function TerminalSection() {
   return (
     <section ref={ref} className='bg-surface py-32'>
       <Container>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className='mb-12 text-center'
-        >
+        <MotionDiv isInView={isInView}>
           <h2 className='mb-4 text-4xl text-foreground md:text-5xl'>
             Built for the terminal
           </h2>
@@ -24,7 +20,7 @@ export function TerminalSection() {
             4 review modes that integrate with your existing workflow. No
             context switching, no web UI required.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
