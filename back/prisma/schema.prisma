@@ -15,6 +15,7 @@ datasource db {
 
 model User {
   id         String        @id @default(ulid())
+  name       String        @map("name_user")
   email      String        @unique @map("email_user")
   password   String        @map("password_user")
   createdAt  DateTime      @default(now()) @map("created_at")
@@ -31,7 +32,12 @@ model Project {
   name        String       @map("name_project")
   description String?
   userId      String       @map("id_user")
+  repositoryUrl String? @map("repository_url")
+  repositoryPath String? @map("repository_path")
+  language      String? @map("language_project")
+  customInstructions String? @map("custom_instructions")
   createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime?    @map("updated_at")
   
   user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   submissions Submission[]
@@ -79,9 +85,22 @@ model Subscription {
   @@map("subscription")
 }
 
+enum SubmissionModeEnum {
+  PR_DIFF
+  UNCOMMITTED
+  COMMIT
+  CUSTOM
+}
+
+enum StatusSubmissionEnum {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
 model StatusSubmission {
   id   String @id @default(ulid())
-  name String @map("name_status_submission")
+  name StatusSubmissionEnum @map("name_status_submission")
   
   submissions Submission[]
   
@@ -91,10 +110,12 @@ model StatusSubmission {
 model Submission {
   id                String            @id @default(ulid())
   codeContent       String            @map("code_content") @db.Text
+  submissionMode    SubmissionModeEnum @map("submission_mode")
   createdAt         DateTime          @default(now()) @map("created_at")
   userId            String            @map("user_id")
   projectId         String            @map("project_id")
   statusSubmissionId String           @map("id_status_submission")
+  metadata          Json?             @map("metadata")
   
   user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   project         Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
