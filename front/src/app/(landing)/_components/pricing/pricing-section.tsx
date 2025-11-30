@@ -65,7 +65,7 @@ export function PricingSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className='mb-16 text-center'
+          className='mb-20 text-center'
         >
           <h2 className='mb-4 text-4xl text-balance text-foreground md:text-5xl'>
             Simple, transparent pricing
