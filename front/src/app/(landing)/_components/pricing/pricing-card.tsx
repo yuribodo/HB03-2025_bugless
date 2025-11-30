@@ -13,7 +13,6 @@ interface PricingCardProps {
   features: string[]
   cta: string
   popular?: boolean
-  index: number
   isInView: boolean
 }
 
@@ -25,14 +24,13 @@ export function PricingCard({
   features,
   cta,
   popular,
-  index,
   isInView,
 }: PricingCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.15 }}
+      initial={{ y: 40 }}
+      animate={isInView ? { y: 0 } : {}}
+      transition={{ duration: 0.5 }}
       className={cn(
         'relative flex flex-col rounded-2xl border bg-background p-8 transition-all duration-200',
         popular

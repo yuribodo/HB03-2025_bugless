@@ -77,7 +77,7 @@ export function PricingSection() {
         </motion.div>
 
         <div className='mx-auto grid max-w-6xl gap-10 md:grid-cols-3'>
-          {plans.map((plan, i) => (
+          {plans.map((plan) => (
             <PricingCard
               key={plan.name}
               name={plan.name}
@@ -87,7 +87,6 @@ export function PricingSection() {
               features={plan.features}
               cta={plan.cta}
               popular={plan.popular}
-              index={i}
               isInView={isInView}
             />
           ))}
