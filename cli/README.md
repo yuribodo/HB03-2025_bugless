@@ -2,13 +2,59 @@
 
 AI-powered code review directly in your terminal.
 
+## Stack
+
+- **Runtime:** Node.js 18+
+- **UI:** Ink (React for CLI)
+- **Git:** simple-git
+- **Validation:** Zod
+- **Config:** conf
+
 ## Installation
 
 ```bash
 cd cli
+
+# Install dependencies
 npm install
+
+# Build
 npm run build
-npm link  # Makes 'bugless' available globally
+
+# Link globally
+npm link
+
+# Now 'bugless' is available globally
+bugless
+```
+
+## Quick Start
+
+```bash
+# Copy environment variables
+cp .env.example .env
+
+# Interactive mode
+bugless
+
+# Review against a branch
+bugless -b main
+
+# Review uncommitted changes
+bugless -u
+```
+
+## Environment Variables
+
+```env
+# Backend API URL
+BUGLESS_API_URL=http://localhost:3000
+
+# Frontend URL (for browser-based login)
+BUGLESS_WEB_URL=http://localhost:3001
+
+# Development mode (uses mock API for reviews)
+BUGLESS_USE_MOCK=true
 ```
 
 ## Usage
@@ -19,7 +65,7 @@ npm link  # Makes 'bugless' available globally
 bugless
 ```
 
-Opens an interactive menu where you can select what to review.
+Opens an interactive menu to select what to review.
 
 ### Direct Commands
 
@@ -49,17 +95,27 @@ bugless -b main -p security
 bugless -u --preset performance
 
 # Available presets:
-# - standard    Balanced review (default)
-# - security    Focus on vulnerabilities
-# - performance Focus on efficiency
-# - quick       Critical issues only
-# - thorough    Comprehensive analysis
+# - standard     Balanced review (default)
+# - security     Focus on vulnerabilities
+# - performance  Focus on efficiency
+# - quick        Critical issues only
+# - thorough     Comprehensive analysis
 ```
 
-## Configuration
+### Authentication
 
 ```bash
-# Set API key (for future backend integration)
+# Login (opens browser)
+bugless login
+
+# Logout
+bugless logout
+```
+
+### Configuration
+
+```bash
+# Set API key (for backend integration)
 bugless config --api-key <key>
 
 # Set API URL
@@ -69,20 +125,14 @@ bugless config --api-url <url>
 bugless config --show
 ```
 
-## Development
+## Scripts
 
 ```bash
-# Watch mode
-npm run dev
-
-# Build for production
-npm run build
-
-# Type check
-npm run typecheck
-
-# Run built version
-npm start
+npm run dev       # Watch mode (tsx watch)
+npm run build     # Build for production (tsup)
+npm run start     # Run built version
+npm run typecheck # Type check
+npm run lint      # Run ESLint
 ```
 
 ## Project Structure
@@ -92,7 +142,11 @@ cli/
 ├── src/
 │   ├── index.tsx       # Entry point
 │   ├── app.tsx         # Main app component
-│   ├── modes/          # Review modes (branch, uncommitted, commit, custom)
+│   ├── modes/          # Review modes
+│   │   ├── branch.tsx
+│   │   ├── uncommitted.tsx
+│   │   ├── commit.tsx
+│   │   └── custom.tsx
 │   ├── components/     # UI components
 │   ├── services/       # Git, API, config services
 │   ├── hooks/          # React hooks
@@ -100,14 +154,60 @@ cli/
 │   ├── schemas/        # Zod schemas
 │   ├── prompts/        # Review prompts and presets
 │   └── utils/          # Utility functions
+├── dist/               # Built output
 ├── package.json
 ├── tsconfig.json
 └── tsup.config.ts
 ```
 
-## Current Status
+## Review Modes
 
-This CLI is currently using **mock data** for reviews. Backend integration will be added in a future update.
+| Mode | Flag | Description |
+|------|------|-------------|
+| Branch | `-b, --branch` | Compare current branch against target |
+| Uncommitted | `-u, --uncommitted` | Review unstaged/staged changes |
+| Commit | `-c, --commit` | Review a specific commit |
+| Custom | `-x, --custom` | Paste code and custom instructions |
+
+## Architecture
+
+```
+┌─────────────────────────────────┐
+│           CLI (Ink)             │
+├─────────────────────────────────┤
+│  ┌─────────┐    ┌────────────┐  │
+│  │  Modes  │───▶│ Components │  │
+│  └────┬────┘    └────────────┘  │
+│       │                         │
+│  ┌────▼────┐    ┌────────────┐  │
+│  │ Services│───▶│   Hooks    │  │
+│  └────┬────┘    └────────────┘  │
+└───────┼─────────────────────────┘
+        │
+        ▼
+┌───────────────┐     ┌──────────────┐
+│  simple-git   │     │  Backend API │
+└───────────────┘     └──────────────┘
+```
+
+## Development
+
+### Mock Mode
+
+Set `BUGLESS_USE_MOCK=true` in `.env` to use mock data for reviews. Authentication always uses the real API.
+
+### Building
+
+```bash
+# Development with hot reload
+npm run dev
+
+# Production build
+npm run build
+
+# Test the built CLI
+npm start
+```
 
 ## License
 

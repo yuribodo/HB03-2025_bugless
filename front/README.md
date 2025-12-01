@@ -1,38 +1,61 @@
 # BugLess Frontend
 
-Landing page do BugLess - ferramenta de code review com IA focada em TypeScript.
+Landing page for BugLess - AI-powered code review tool focused on TypeScript.
 
 ## Stack
 
 - **Framework:** Next.js 16 (App Router)
 - **UI:** React 19, Tailwind CSS 4, shadcn/ui
-- **Animacoes:** Framer Motion
-- **Icones:** Phosphor Icons
+- **Animations:** Framer Motion
+- **Icons:** Phosphor Icons
+- **Forms:** React Hook Form + Zod
 - **Package Manager:** pnpm
 
 ## Quick Start
 
 ```bash
-# Instalar dependencias
+# Copy environment variables
+cp .env.example .env
+
+# Install dependencies
 pnpm install
 
-# Rodar em desenvolvimento
+# Start development server
 pnpm dev
 
-# Build de producao
+# Build for production
 pnpm build
+
+# Start production server
+pnpm start
 ```
 
-## Estrutura do Projeto
+## Environment Variables
+
+```env
+# Backend API URL
+NEXT_PUBLIC_API_URL=http://localhost:3000
+```
+
+## Scripts
+
+```bash
+pnpm dev    # Start development server (http://localhost:3001)
+pnpm build  # Build for production
+pnpm start  # Start production server
+pnpm lint   # Run ESLint
+```
+
+## Project Structure
 
 ```
 src/
 ├── app/
 │   ├── layout.tsx              # Root layout
 │   ├── page.tsx                # Landing page
-│   ├── globals.css             # Estilos globais
-│   └── (landing)/              # Route group da landing
-│       ├── _components/        # Componentes da landing (colocation)
+│   ├── globals.css             # Global styles
+│   └── (landing)/              # Route group
+│       ├── _components/        # Landing components (colocation)
 │       │   ├── hero/
 │       │   ├── features/
 │       │   ├── problem/
@@ -40,46 +63,68 @@ src/
 │       │   ├── comparison/
 │       │   ├── pricing/
 │       │   └── shared/
-│       └── _hooks/             # Hooks especificos da landing
+│       └── _hooks/             # Landing-specific hooks
 │
 ├── components/
-│   ├── ui/                     # Componentes base (shadcn/ui)
-│   ├── common/                 # Componentes globais (Header, etc)
-│   └── motion/                 # Wrappers de animacao
+│   ├── ui/                     # Base components (shadcn/ui)
+│   ├── common/                 # Global components (Header, etc)
+│   └── motion/                 # Animation wrappers
 │
 ├── lib/
-│   ├── utils.ts                # Utilitarios (cn, etc)
-│   └── animations.ts           # Variantes de animacao
+│   ├── utils.ts                # Utilities (cn, etc)
+│   └── animations.ts           # Animation variants
 │
-├── hooks/                      # Hooks globais
-├── types/                      # Tipos globais
-└── services/queries/           # React Query (futuro)
+├── hooks/                      # Global hooks
+├── types/                      # Global types
+└── services/queries/           # React Query (future)
 ```
 
-## Convencoes
+## Conventions
 
 ### Colocation
 
-Componentes usados apenas em uma rota ficam dentro dessa rota:
+Components used only in a specific route live inside that route:
 
-- `app/(landing)/_components/` - componentes da landing
-- `app/(landing)/_hooks/` - hooks da landing
+- `app/(landing)/_components/` - landing components
+- `app/(landing)/_hooks/` - landing hooks
 
-Pastas com `_` sao ignoradas pelo roteamento do Next.js.
+Folders prefixed with `_` are ignored by Next.js routing.
 
-### Nomenclatura
+### Naming
 
-- Arquivos: `kebab-case.tsx`
-- Componentes: `PascalCase`
-- Hooks: `use-nome.ts`
-- Variaveis/funcoes: `camelCase`
-- Constantes: `SCREAMING_SNAKE_CASE`
+| Type | Convention | Example |
+|------|------------|---------|
+| Files | `kebab-case.tsx` | `hero-section.tsx` |
+| Components | `PascalCase` | `HeroSection` |
+| Hooks | `use-name.ts` | `use-scroll.ts` |
+| Variables/Functions | `camelCase` | `handleClick` |
+| Constants | `SCREAMING_SNAKE_CASE` | `API_URL` |
 
 ### Imports
 
-Path alias configurado: `@/` aponta para `src/`
+Path alias configured: `@/` points to `src/`
 
 ```tsx
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 ```
+
+## Design System
+
+Uses CSS variables for theming. Base components from shadcn/ui with Tailwind CSS 4.
+
+### Colors
+
+- `bg-background`, `text-foreground` - Base colors
+- `bg-primary`, `text-primary-foreground` - Primary actions
+- `bg-muted`, `text-muted-foreground` - Subtle elements
+- `border-border` - Borders
+
+### Typography
+
+- Tailwind's default type scale
+- `font-variant-numeric: tabular-nums` for numbers
+
+## License
+
+MIT
