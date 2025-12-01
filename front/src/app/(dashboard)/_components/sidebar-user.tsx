@@ -9,8 +9,9 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
-import { SignOut } from '@phosphor-icons/react/dist/ssr'
+import { SignOutIcon } from '@phosphor-icons/react/dist/ssr'
 
+import Link from 'next/link'
 import type { User } from '../_lib/mock-data'
 
 interface SidebarUserProps {
@@ -49,7 +50,9 @@ export function SidebarUser({ user, isCollapsed }: SidebarUserProps) {
       {!isCollapsed && (
         <div className='flex flex-1 flex-col overflow-hidden'>
           <span className='truncate text-sm font-medium'>{user.name}</span>
-          <span className='truncate text-xs text-text-secondary'>{user.email}</span>
+          <span className='truncate text-xs text-text-secondary'>
+            {user.email}
+          </span>
         </div>
       )}
       {!isCollapsed && (
@@ -75,13 +78,14 @@ export function SidebarUser({ user, isCollapsed }: SidebarUserProps) {
         content
       )}
       {!isCollapsed && (
-        <button
+        <Link
+          href='/'
           className='mt-2 flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-text-secondary transition-colors hover:bg-surface-hover hover:text-foreground'
           type='button'
         >
-          <SignOut size={18} />
+          <SignOutIcon size={18} />
           <span>Sign Out</span>
-        </button>
+        </Link>
       )}
     </div>
   )
