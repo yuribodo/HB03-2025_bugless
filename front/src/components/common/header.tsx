@@ -2,7 +2,7 @@
 
 import { Container } from '@/app/(landing)/_components/shared/container'
 import { NAV_LINKS } from '@/lib/constants'
-import { ListIcon, XIcon } from '@phosphor-icons/react'
+import { GithubLogoIcon, ListIcon, XIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -25,10 +25,10 @@ export function Header() {
         className='fixed top-0 left-0 z-50 w-full bg-linear-to-b from-black via-black/60 to-transparent md:py-2'
       >
         <Container>
-          <div className='flex items-center justify-between py-4'>
+          <div className='relative flex items-center justify-between py-4'>
             <Logo />
 
-            <nav className='hidden md:flex md:items-center md:gap-6'>
+            <nav className='hidden md:absolute md:left-1/2 md:flex md:-translate-x-1/2 md:items-center md:gap-6'>
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
@@ -40,7 +40,15 @@ export function Header() {
               ))}
             </nav>
 
-            <div className='hidden md:flex'>
+            <div className='hidden md:flex md:items-center md:gap-4'>
+              <a
+                href='https://github.com/ProgramadoresSemPatria/HB03-2025_bugless'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-text-secondary transition-colors hover:text-foreground'
+              >
+                <GithubLogoIcon size={20} weight='fill' />
+              </a>
               <Button asChild>
                 <Link href='/dashboard'>Get started</Link>
               </Button>

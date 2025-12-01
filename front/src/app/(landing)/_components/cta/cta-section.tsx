@@ -1,8 +1,8 @@
 'use client'
 
 import { MotionDiv } from '@/components/motion'
-import { Button } from '@/components/ui/button'
 import { useSectionReveal } from '../../_hooks/use-section-reveal'
+import { InstallCommand } from '../hero'
 import { Container } from '../shared/container'
 import { SectionDescription } from '../shared/section-description'
 import { SectionHeading } from '../shared/section-heading'
@@ -19,7 +19,7 @@ export function CTASection() {
             Get started with Bugless for free
           </SectionDescription>
 
-          <Button>Get started</Button>
+          <InstallCommand />
         </MotionDiv>
       </Container>
     </section>
