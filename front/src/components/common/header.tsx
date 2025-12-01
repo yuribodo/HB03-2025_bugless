@@ -1,10 +1,10 @@
 'use client'
 
-import { InstallCommand } from '@/app/(landing)/_components/hero'
 import { Container } from '@/app/(landing)/_components/shared/container'
 import { NAV_LINKS } from '@/lib/constants'
 import { GithubLogoIcon, ListIcon, XIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
+import Link from 'next/link'
 import { useState } from 'react'
 import { Button } from '../ui/button'
 import { Logo } from './logo'
@@ -40,7 +40,7 @@ export function Header() {
               ))}
             </nav>
 
-            <div className='hidden md:flex'>
+            <div className='hidden md:flex md:items-center md:gap-4'>
               <a
                 href='https://github.com/ProgramadoresSemPatria/HB03-2025_bugless'
                 target='_blank'
@@ -49,6 +49,9 @@ export function Header() {
               >
                 <GithubLogoIcon size={20} weight='fill' />
               </a>
+              <Button asChild>
+                <Link href='/dashboard'>Get started</Link>
+              </Button>
             </div>
 
             <Button
@@ -98,7 +101,13 @@ export function Header() {
                 </motion.a>
               ))}
 
-              <InstallCommand withCopyButton={false} />
+              <Link
+                href='/dashboard'
+                onClick={() => setIsMobileMenuOpen(false)}
+                className='mt-4 rounded-lg bg-primary px-8 py-3 text-lg font-medium text-primary-foreground transition-colors hover:bg-primary-hover'
+              >
+                Get Started
+              </Link>
             </motion.nav>
           </motion.div>
         )}
