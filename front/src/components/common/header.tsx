@@ -1,8 +1,9 @@
 'use client'
 
+import { InstallCommand } from '@/app/(landing)/_components/hero'
 import { Container } from '@/app/(landing)/_components/shared/container'
 import { NAV_LINKS } from '@/lib/constants'
-import { ListIcon, XIcon } from '@phosphor-icons/react'
+import { GithubLogoIcon, ListIcon, XIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import { Button } from '../ui/button'
@@ -24,10 +25,10 @@ export function Header() {
         className='fixed top-0 left-0 z-50 w-full bg-linear-to-b from-black via-black/60 to-transparent md:py-2'
       >
         <Container>
-          <div className='flex items-center justify-between py-4'>
+          <div className='relative flex items-center justify-between py-4'>
             <Logo />
 
-            <nav className='hidden md:flex md:items-center md:gap-6'>
+            <nav className='hidden md:absolute md:left-1/2 md:flex md:-translate-x-1/2 md:items-center md:gap-6'>
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
@@ -40,7 +41,14 @@ export function Header() {
             </nav>
 
             <div className='hidden md:flex'>
-              <Button>Get started</Button>
+              <a
+                href='https://github.com/ProgramadoresSemPatria/HB03-2025_bugless'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-text-secondary transition-colors hover:text-foreground'
+              >
+                <GithubLogoIcon size={20} weight='fill' />
+              </a>
             </div>
 
             <Button
@@ -90,16 +98,7 @@ export function Header() {
                 </motion.a>
               ))}
 
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className='mt-4 cursor-pointer rounded-lg bg-primary px-8 py-3 text-lg font-medium text-primary-foreground transition-colors hover:bg-primary-hover'
-              >
-                Get Started
-              </motion.button>
+              <InstallCommand withCopyButton={false} />
             </motion.nav>
           </motion.div>
         )}
